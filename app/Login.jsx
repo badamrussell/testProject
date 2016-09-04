@@ -5,6 +5,7 @@ const Login = React.createClass({
     return (
       <div>
         <h1>Login Page</h1>
+        <h2>Auto Deply attempt #2</h2>
         <form>
           <div>
             <label>
