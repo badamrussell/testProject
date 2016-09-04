@@ -12,5 +12,5 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: testproject.badrussell
   skip_cleanup: true
-  local-dir: dist
+  local_dir: dist
   acl: public_read
