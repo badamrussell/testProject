@@ -10,7 +10,7 @@
     "build:dev": "webpack",
     "postbuild": "",
     "start": "webpack-dev-server --content-base dist --history-api-fallback",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --require test/helpers/setup.js",
     "test:mocha": "mocha --require test/helpers/setup.js",
     "test:karma": "karma start",
     "lint": "standard"
