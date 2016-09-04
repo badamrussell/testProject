@@ -7,7 +7,7 @@
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "webpack --optimize-minimize --optimize-dedupe --devtool source-map",
-    "build:dev": "webpack",
+    "build:dev": "webpack --optimize-minimize --optimize-dedupe --devtool source-map",
     "postbuild": "",
     "start": "webpack-dev-server --content-base dist --history-api-fallback",
     "test": "mocha --require test/helpers/setup.js",
