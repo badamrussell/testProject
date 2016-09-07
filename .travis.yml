@@ -6,14 +6,12 @@ script:
   - npm test
   - npm run build
 
-before_deploy:
-  - sh awssetup.sh
 
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  bucket: "testproject.badrussell"
+  bucket: $TRAVIS_BRANCH + "testproject.badrussell/"
   skip_cleanup: true
   local-dir: dist
   region: "us-east-1"

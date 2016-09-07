@@ -1,6 +1,8 @@
 require('babel-register');
 require('babel-polyfill');
 
+var fs = require('fs');
+
 const AWS = require('aws-sdk');
 AWS.config.region = 'us-east-1';
 
@@ -46,6 +48,7 @@ var AwsApi = {
       if (err) {
         console.log("Error:", err);
       } else {
+        console.log("Successfully created bucket.")
         // s3.upload(
         //   {Body: 'Hello!'},
         //   function() {
@@ -54,6 +57,14 @@ var AwsApi = {
         // );
       }
     });
+  },
+
+  uploadFile: function(bucketName, folderPath, fileName) {
+    var body = fs.createReadStream('bigfile').pipe(zlib.createGzip());
+var s3obj = new AWS.S3({params: {Bucket: 'myBucket', Key: 'myKey'}});
+s3obj.upload({Body: body}).
+  on('httpUploadProgress', function(evt) { console.log(evt); }).
+  send(function(err, data) { console.log(err, data) });
   },
 
   // createBucket () {
@@ -91,6 +102,33 @@ var AwsApi = {
 
   //     }
   //   );
+  // }
+  // invalidateCloudfront: function() {
+  //   var {clientConfig, cloudfrontInvalidateOptions} = this
+
+  //   return new Promise(function(resolve, reject) {
+  //     if (cloudfrontInvalidateOptions.DistributionId) {
+  //       var cloudfront = new aws.CloudFront()
+
+  //       cloudfront.config.update({
+  //         accessKeyId: clientConfig.s3Options.accessKeyId,
+  //         secretAccessKey: clientConfig.s3Options.secretAccessKey,
+  //       })
+
+  //       cloudfront.createInvalidation({
+  //         DistributionId: cloudfrontInvalidateOptions.DistributionId,
+  //         InvalidationBatch: {
+  //           CallerReference: Date.now().toString(),
+  //           Paths: {
+  //             Quantity: cloudfrontInvalidateOptions.Items.length,
+  //             Items: cloudfrontInvalidateOptions.Items
+  //           }
+  //         }
+  //       }, (err, res) => err ? reject(err) : resolve(res.Id))
+  //     } else {
+  //       return resolve(null)
+  //     }
+  //   })
   // }
 };
 

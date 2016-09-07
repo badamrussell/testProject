@@ -83,17 +83,17 @@ module.exports = {
       template: './app/templates/index.pug',
       title: 'Backpack Health',
       name: 'stuff'
-    }),
-    new S3Plugin({
-      s3Options: {
-        accessKeyId: '',
-        secretAccessKey: '',
-        region: 'us-east-1',
-      },
-      s3UploadOptions: {
-        Bucket: 'testproject.badrussell',
-      },
     })
+    // new S3Plugin({
+    //   s3Options: {
+    //     accessKeyId: '',
+    //     secretAccessKey: '',
+    //     region: 'us-east-1',
+    //   },
+    //   s3UploadOptions: {
+    //     Bucket: 'testproject.badrussell',
+    //   },
+    // })
   ],
 
 
