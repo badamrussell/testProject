@@ -17,3 +17,6 @@ deploy:
   upload-dir: $TRAVIS_BRANCH
   region: "us-east-1"
   acl: public_read
+
+after_deploy:
+  - aws configure set preview.cloudfront true
