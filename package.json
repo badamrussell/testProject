@@ -13,7 +13,8 @@
     "test": "mocha --require test/helpers/setup.js",
     "test:mocha": "mocha --require test/helpers/setup.js",
     "test:karma": "karma start",
-    "lint": "standard"
+    "lint": "standard",
+    "aws": "node ./app/utilities/aws_s3.js"
   },
   "author": "",
   "license": "UNLICENSED",
@@ -26,6 +27,7 @@
     "react-router": "^2.7.0"
   },
   "devDependencies": {
+    "aws-sdk": "^2.5.6",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-__coverage__": "^11.0.0",
@@ -62,6 +64,7 @@
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
+    "webpack-s3-plugin": "^0.9.0",
     "webpack-validator": "^2.2.7"
   }
 }

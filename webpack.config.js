@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackValidator = require('webpack-validator')
+const S3Plugin = require('webpack-s3-plugin')
 
 /*
 HtmlWebpackPlugin
@@ -82,6 +83,16 @@ module.exports = {
       template: './app/templates/index.pug',
       title: 'Backpack Health',
       name: 'stuff'
+    }),
+    new S3Plugin({
+      s3Options: {
+        accessKeyId: '',
+        secretAccessKey: '',
+        region: 'us-east-1',
+      },
+      s3UploadOptions: {
+        Bucket: 'testproject.badrussell',
+      },
     })
   ],
 
