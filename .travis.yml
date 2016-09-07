@@ -11,8 +11,9 @@ deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  bucket: $TRAVIS_BRANCH + "testproject.badrussell/"
+  bucket: "testproject.badrussell"
   skip_cleanup: true
   local-dir: dist
+  upload-dir: $TRAVIS_BRANCH
   region: "us-east-1"
   acl: public_read
