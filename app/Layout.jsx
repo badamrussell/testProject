@@ -5,6 +5,7 @@ const Home = React.createClass({
   render () {
     return (
       <div>
+        <h1>Layout parent</h1>
         {this.props.children}
         <div>
           <ul>

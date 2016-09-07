@@ -3,7 +3,7 @@ const React = require('react')
 const Home = React.createClass({
   render () {
     return (
-      <div>Home page</div>
+      <div>The new and improved Home page</div>
     )
   }
 })
