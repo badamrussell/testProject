@@ -4,6 +4,8 @@ node_js:
 
 env:
   - BUILD_ENV=test BUILDSHA=bash SHOULD_DEPLOY=true
+install:
+  - pip install awscli
 
 script:
   - npm test
@@ -24,5 +26,5 @@ deploy:
 
 after_deploy:
   - aws configure set preview.cloudfront true
-  - aws s3 mb s3://sampleproject.badrussell.done
+  - aws s3 mb s3://sampleproject12345.badrussell
   - echo "done!"
