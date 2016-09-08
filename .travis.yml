@@ -25,7 +25,7 @@ deploy:
   acl: public_read
   on:
     all_branches: true
-    tags: true
+    branch: dev1 dev2
 after_deploy:
 - aws configure set preview.cloudfront true
 - aws cloudfront create-distribution --cli-input-json $(node cloudfront_distribution_json.js
