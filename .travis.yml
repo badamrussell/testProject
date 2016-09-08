@@ -8,6 +8,7 @@ env:
 
 install:
   - ./awscli-bundle/install -b ~/bin/aws
+  - npm install
 
 script:
   - npm test
