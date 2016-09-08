@@ -1,34 +1,33 @@
 language:
-  - node_js
+- node_js
 node_js:
-  - "6"
-
+- '6'
 env:
+  matrix:
   - BUILD_ENV=test BUILDSHA=bash SHOULD_DEPLOY=true
-
+  global:
+  - secure: D5Yufhoi9lvdRUsifHbN1Gt6zwB2fEzS5U3c3WXkNQ1hmpnx14AwW3K0sj6Bg1ly3+4l13w1Ewzskz6HKv5LKl/qSBeJI1PlB6x0ACKhdZAt16sfuYvT1Io+3F7OEJUW9PKoiKr1YvMKDKshnrn//PKpQSlV5SZA8SLhnQAfiacix7vK8Ypt2rS178dCT57MBb7i5NWRtkxnEeUyU/aM4Tou6Od9IGfJohPlTGC+fefsp69slHV1uci1II+eB0nRgwSe/QZG/3Aui+hF+iPYSP+NhppT/5mF5/sp8c78cal/Ics7PI92HIOcoz57Szny0AH9474KrdhL8Lgy7e9fES25g/U3/P3IwyUaLqBXwoqntKF4ftTeAxuRK03X1FOkoo28OhIMf3rmbu63QWNnwxDdS6Xb7hly8AHFnhkayBTTSj7WyuOjhnAY1q8Tm0JPJseksM33wU0M+TiBFyOHmUdCm1GHdId90AOB2+iBmVqkJp931NyXzfPcXqk9V+b/rp1IBQzNZn2TP3rD5KMgPNv+hFv8Ls9mRVUnrmmDq8h4y2duUffEo1UunvlGb/mEEN23pn3wFgl4KBhXvkl6OiTIctuGUm2eK1B+BI85eLHwe9DVqskCFv4r75Kxy+/UBihLZ0P168XHqBFTpFqFbQECM0x4OUqY0dbOHqL8HRs=
 install:
-  - ./awscli-bundle/install -b ~/bin/aws
-  - npm install
-
+- "./awscli-bundle/install -b ~/bin/aws"
+- npm install
 script:
-  - npm test
-  - npm run build
-
+- npm test
+- npm run build
 deploy:
   provider: s3
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: $BUCKET_NAME
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  bucket: "$BUCKET_NAME"
   skip_cleanup: true
   local-dir: dist
-  upload-dir: $TRAVIS_COMMIT
-  region: "us-east-1"
+  upload-dir: "$TRAVIS_COMMIT"
+  region: us-east-1
   acl: public_read
   on:
     all_branches: true
     tags: true
-
 after_deploy:
-  - aws configure set preview.cloudfront true
-  - aws cloudfront create-distribution --cli-input-json $(node cloudfront_distribution_json.js $BUCKET_NAME $TRAVIS_COMMIT)
-  - echo "done!"
+- aws configure set preview.cloudfront true
+- aws cloudfront create-distribution --cli-input-json $(node cloudfront_distribution_json.js
+  $BUCKET_NAME $TRAVIS_BRANCH)
+- echo "done!"
