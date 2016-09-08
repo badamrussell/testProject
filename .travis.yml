@@ -20,9 +20,9 @@ deploy:
   region: "us-east-1"
   acl: public_read
   on:
-    call_branches: true
+    all_branches: true
 
 after_deploy:
   - aws configure set preview.cloudfront true
   - aws s3 mb s3://sampleproject.badrussell.done
-  - echo done!
+  - echo "done!"

@@ -40,7 +40,7 @@ var AwsApi = {
     var s3 = new AWS.S3({
       params: {
         Bucket: bucketName,
-        Key: 'AKIAIFF3OL6QTZ2KQKIQ'
+        Key: ''
       }
     });
 
