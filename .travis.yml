@@ -10,6 +10,9 @@ script:
   - npm test
   - npm run build
 
+before_deploy:
+  - aws s3 mb s3://sampleproject12345.badrussell
+  
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
@@ -25,5 +28,5 @@ deploy:
 
 after_deploy:
   - aws configure set preview.cloudfront true
-  - aws s3 mb s3://sampleproject12345.badrussell
+  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
   - echo "done!"
