@@ -1,9 +1,12 @@
-language: node_js
+language: node_js python
 node_js:
   - "6"
+python:
+  - "3.5"
 
 env:
   - BUILD_ENV=test BUILDSHA=bash SHOULD_DEPLOY=true
+
 install:
   - pip install awscli
 
