@@ -1,14 +1,15 @@
-language: node_js python
+language:
+  - node_js
 node_js:
   - "6"
-python:
-  - "3.5"
 
 env:
   - BUILD_ENV=test BUILDSHA=bash SHOULD_DEPLOY=true
 
 install:
-  - pip install awscli
+  - curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+  - unzip awscli-bundle.zip
+  - sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 script:
   - npm test
