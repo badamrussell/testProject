@@ -25,6 +25,9 @@ deploy:
 
 after_deploy:
   - aws configure set preview.cloudfront true
+  - aws cloudfront get-distribution --id $CLOUDFRONT_DISTRIBUTION_ID
   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
   - aws s3 mb s3://sampleproject12345.badrussell
   - echo "done!"
+
+  - 
