@@ -82,7 +82,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './app/templates/index.pug',
       title: 'Sample Project',
-      name: 'stuff'
+      name: 'travis > s3 > cloudfront > deploy'
     })
     // new S3Plugin({
     //   s3Options: {
