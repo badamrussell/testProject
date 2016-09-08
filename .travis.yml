@@ -2,6 +2,11 @@ language: node_js
 node_js:
   - "6"
 
+env:
+  - BUILD_ENV=test
+  - BUILDSHA=bash
+  - SHOULD_DEPLOY=true
+
 script:
   - npm test
   - npm run build
@@ -17,6 +22,22 @@ deploy:
   upload-dir: $TRAVIS_BRANCH
   region: "us-east-1"
   acl: public_read
+  on:
+    condition: $SHOULD_DEPLOY=true
+
+  - provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: "testproject.zoo.badrussell"
+  skip_cleanup: true
+  local-dir: dist
+  upload-dir: $TRAVIS_BRANCH
+  region: "us-east-1"
+  acl: public_read
+  on:
+    condition: $SHOULD_DEPLOY=true
 
 after_deploy:
   - aws configure set preview.cloudfront true
+  - aws s3 mb s3://sampleproject.badrussell.done
+  - echo done!
