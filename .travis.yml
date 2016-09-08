@@ -24,7 +24,6 @@ deploy:
   region: us-east-1
   acl: public_read
   on:
-    all_branches: true
     branch: dev1 dev2
 after_deploy:
 - aws configure set preview.cloudfront true
