@@ -81,7 +81,7 @@ module.exports = {
     // }),
     new HtmlWebpackPlugin({
       template: './app/templates/index.pug',
-      title: 'Backpack Health',
+      title: 'Sample Project',
       name: 'stuff'
     })
     // new S3Plugin({

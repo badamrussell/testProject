@@ -8,6 +8,7 @@ env:
 
 install:
   - ./awscli-bundle/install -b ~/bin/aws
+  - apt-get install jq
   - npm install
 
 script:
@@ -18,7 +19,7 @@ deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  bucket: "testproject.badrussell"
+  bucket: $TRAVIS_BRANCH
   skip_cleanup: true
   local-dir: dist
   upload-dir: $TRAVIS_COMMIT
@@ -29,7 +30,5 @@ deploy:
 
 after_deploy:
   - aws configure set preview.cloudfront true
-  - aws cloudfront get-distribution --id $CLOUDFRONT_DISTRIBUTION_ID
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-  - aws s3 mb s3://sampleproject12345.badrussell
+  - aws cloudfront create-distribution --cli-input-json $(node cloudfront_distribution_json.js $TRAVIS_BRANCH $TRAVIS_COMMIT)
   - echo "done!"
